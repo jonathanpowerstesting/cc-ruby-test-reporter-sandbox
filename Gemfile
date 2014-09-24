@@ -38,5 +38,5 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'simplecov', :require => false, :group => :test
-
+gem "codeclimate-test-reporter", group: :test, require: nil
+gem 'rspec-rails'
