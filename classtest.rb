@@ -1,3 +1,4 @@
+class Dog  
 def init_form
   Element.find( "div#new-todo" ).html TodoView.new_todo
   
@@ -52,4 +53,5 @@ end
 Document.ready? do
   init_form
   init_views_for TodoView
+end
 end
