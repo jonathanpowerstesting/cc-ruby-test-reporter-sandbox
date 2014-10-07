@@ -2,6 +2,7 @@
   "RSpec": {
     "coverage": {
       "/Users/jpowers/Documents/Git Repos/rspectesting/lib/zombie.rb": [
+        null,
         1,
         1,
         null,
@@ -15,6 +16,6 @@
         null
       ]
     },
-    "timestamp": 1412710997
+    "timestamp": 1412712079
   }
 }
