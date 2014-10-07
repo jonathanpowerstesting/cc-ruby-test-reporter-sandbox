@@ -1,3 +1,4 @@
+# 351
 class Zombie
 	attr_accessor :name
 	
