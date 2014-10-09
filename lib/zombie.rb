@@ -6,7 +6,19 @@ class Zombie
 		@name = 'Ash'
 	end
 	
-	def hello  
+	def hello1 
+  		'Hello'  
+	end
+	
+	def hello2  
+  		'Hello'  
+	end
+	
+	def hello3  
+  		'Hello'  
+	end
+	
+	def hello4
   		'Hello'  
 	end
 end
