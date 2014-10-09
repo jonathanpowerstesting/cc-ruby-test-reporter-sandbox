@@ -9,12 +9,4 @@ class Zombie
 	def hello  
   		'Hello'  
 	end
-	
-	def hello2  
-  		'Hello'  
-	end
-	
-	def hello3  
-  		'Hello'  
-	end
 end
