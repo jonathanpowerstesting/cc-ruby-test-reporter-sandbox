@@ -40,3 +40,4 @@ gem 'spring',        group: :development
 
 gem "codeclimate-test-reporter", group: :test, require: nil
 gem 'rspec-rails'
+gem 'simplecov', :require => false, :group => :test
