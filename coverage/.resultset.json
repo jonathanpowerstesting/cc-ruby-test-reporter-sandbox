@@ -1,7 +1,53 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/jpowers/Documents/Git Repos/cc-ruby-test-reporter-sandbox/spec/lib/zombie_spec.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
       "/Users/jpowers/Documents/Git Repos/cc-ruby-test-reporter-sandbox/lib/zombie.rb": [
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/Users/jpowers/Documents/Git Repos/cc-ruby-test-reporter-sandbox/spec/vendor/zombie2_spec.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/jpowers/Documents/Git Repos/cc-ruby-test-reporter-sandbox/vendor/zombie2.rb": [
         null,
         1,
         1,
@@ -28,6 +74,6 @@
         null
       ]
     },
-    "timestamp": 1414976820
+    "timestamp": 1416522158
   }
 }
