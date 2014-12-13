@@ -1,33 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/jpowers/Documents/Git Repos/cc-ruby-test-reporter-sandbox/lib/zombie.rb": [
-        null,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null
-      ]
     },
-    "timestamp": 1417543544
+    "timestamp": 1418167685
   }
 }
