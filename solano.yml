@@ -1,0 +1,4 @@
+tests:
+  - 'bundle exec rake'
+test_pattern: none
+ruby_version: ruby-2.0.0-p481
