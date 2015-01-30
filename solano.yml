@@ -1,5 +1,2 @@
-coverage: true
-environment:
-  'TO_FILE': 'false'
 tests:
-  bundle exec rake
+  - bundle exec rake
