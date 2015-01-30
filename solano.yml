@@ -1,2 +1,3 @@
+coverage: true
 environment:
   'TO_FILE': 'false'
