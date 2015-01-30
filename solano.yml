@@ -1,3 +1,5 @@
 coverage: true
 environment:
   'TO_FILE': 'false'
+tests:
+  CODECLIMATE_REPO_TOKEN=c47db3a4a7d96eb8a54354f5616502ae37a2bb07ece184395ea91fd5e22249a6 bundle exec rake
