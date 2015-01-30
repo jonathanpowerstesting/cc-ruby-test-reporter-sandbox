@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 class Zombie
 	attr_accessor :name
 	
@@ -9,16 +8,12 @@ class Zombie
 	def hello1 
   		'Hello'  
 	end
-	
-	def hello2  
+
+	def hello2
   		'Hello'  
 	end
-	
-	def hello3  
-  		'Hello'  
-	end
-	
-	def hello4
+
+	def hello3
   		'Hello'  
 	end
 end
