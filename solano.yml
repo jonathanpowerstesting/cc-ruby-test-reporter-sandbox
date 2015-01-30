@@ -1,5 +1,3 @@
 coverage: true
-tests:
-  bundle exec rake
 environment:
   'TO_FILE': 'false'
