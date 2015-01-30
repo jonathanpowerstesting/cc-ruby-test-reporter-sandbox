@@ -1,2 +1,3 @@
 tests:
-  - bundle exec rake
+  - 'bundle exec rake'
+test_pattern: 'none'
