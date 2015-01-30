@@ -1,4 +1,1 @@
-tests:
-  - 'printenv'
-  - 'bundle exec rake'
-test_pattern: 'none'
+
