@@ -1,5 +1,13 @@
+ruby_version: 2.1.5
 test_pattern:
-  - features/*.feature
-  - features/api/*.feature
-  - spec/**/*_spec.rb
-  - test/**/*_test.rb
+- spec*_test.rb
+postgresql:
+version: '9.4'
+sqlite: false
+rake:
+rails_env: 'tddium'
+environment:
+'RAILS_ENV': 'tddium'
+hooks:
+worker_setup: bundle exec rake db:migrate db:seed
+post_build: bundle exec rake tddium:post_build_hook
