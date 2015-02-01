@@ -1,3 +1,5 @@
-coverage: true
-environment:
-  'TO_FILE': 'false'
+test_pattern:
+  - features/*.feature
+  - features/api/*.feature
+  - spec/**/*_spec.rb
+  - test/**/*_test.rb
