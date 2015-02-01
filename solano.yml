@@ -1,11 +1,10 @@
 ruby_version: 2.1.5
 test_pattern:
   - spec*_spec.rb
-sqlite: false
 rake:
   rails_env: 'tddium'
 environment:
   'RAILS_ENV': 'tddium'
 hooks:
-worker_setup: "bundle exec rake db:migrate db:seed"
-post_build: "bundle exec rake tddium:post_build_hook"
+worker_setup: bundle exec rake db:migrate db:seed
+post_build: bundle exec rake tddium:post_build_hook
