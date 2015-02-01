@@ -1,6 +1,4 @@
 ruby_version: 2.1.5
-postgresql:
-  version: '9.4'
 rake:
   rails_env: 'tddium'
 test_pattern:
