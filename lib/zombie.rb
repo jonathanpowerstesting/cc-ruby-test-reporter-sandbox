@@ -1,4 +1,4 @@
-class Zombie
+class ZombieDude
 	attr_accessor :name
 	
 	def initialize
