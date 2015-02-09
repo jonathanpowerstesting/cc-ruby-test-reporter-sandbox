@@ -1,4 +1,4 @@
-class Dog  
+class Goat  
   def initialize(breed, name)  
     # Instance variables  
     @breed = breed  
