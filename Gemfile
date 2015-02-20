@@ -39,4 +39,4 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem "codeclimate-test-reporter", group: :test, require: nil
-gem 'rspec-rails'
+# gem 'rspec-rails'
