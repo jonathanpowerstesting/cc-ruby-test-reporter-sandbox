@@ -45,21 +45,7 @@ class Cat
     end
   end
 
-  def update_attributes_from_transaction_state(transaction_state, depth)
-    @reflects_state = [false] if depth == 0
-
-    if transaction_state && transaction_state.finalized? && !has_transactional_callbacks?
-      unless @reflects_state[depth]
-        restore_transaction_record_state if transaction_state.rolledback?
-        clear_transaction_record_state
-        @reflects_state[depth] = true
-      end
-
-      if transaction_state.parent && !@reflects_state[depth+1]
-        update_attributes_from_transaction_state(transaction_state.parent, depth+1)
-      end
-    end
-  end
+  # D ---------------------------------------------------------------------------------------------------------------------------------------
 
   # def validate(*args, &block)
   #   options = args.extract_options!
@@ -113,6 +99,8 @@ class Cat
 
   #   parents.values
   # end
+
+  # F ---------------------------------------------------------------------------------------------------------------------------------------
 
   # def unscope!(*args) # :nodoc:
   #   args.flatten!
