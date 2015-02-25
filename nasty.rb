@@ -61,4 +61,57 @@ class Cat
     end
   end
 
+   def validate(*args, &block)
+    options = args.extract_options!
+
+    if args.all? { |arg| arg.is_a?(Symbol) }
+      options.each_key do |k|
+        unless VALID_OPTIONS_FOR_VALIDATE.include?(k)
+          raise ArgumentError.new("Unknown key: #{k.inspect}. Valid keys are: #{VALID_OPTIONS_FOR_VALIDATE.map(&:inspect).join(', ')}. Perhaps you meant to call `validates` instead of `validate`?")
+        end
+      end
+    end
+
+    if options.key?(:on)
+      options = options.dup
+      options[:if] = Array(options[:if])
+      options[:if].unshift ->(o) {
+        Array(options[:on]).include?(o.validation_context)
+      }
+    end
+
+    args << options
+    set_callback(:validate, *args, &block)
+  end
+
+  def instantiate(result_set, aliases)
+    primary_key = aliases.column_alias(join_root, join_root.primary_key)
+
+    seen = Hash.new { |h,parent_klass|
+      h[parent_klass] = Hash.new { |i,parent_id|
+        i[parent_id] = Hash.new { |j,child_klass| j[child_klass] = {} }
+      }
+    }
+
+    model_cache = Hash.new { |h,klass| h[klass] = {} }
+    parents = model_cache[join_root]
+    column_aliases = aliases.column_aliases join_root
+
+    message_bus = ActiveSupport::Notifications.instrumenter
+
+    payload = {
+      record_count: result_set.length,
+      class_name: join_root.base_klass.name
+    }
+
+    message_bus.instrument('instantiation.active_record', payload) do
+      result_set.each { |row_hash|
+        parent = parents[row_hash[primary_key]] ||= join_root.instantiate(row_hash, column_aliases)
+        construct(parent, join_root, row_hash, result_set, seen, model_cache, aliases)
+      }
+    end
+
+    parents.values
+  end
+
 end
