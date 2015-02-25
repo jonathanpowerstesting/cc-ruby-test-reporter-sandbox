@@ -23,4 +23,42 @@ class Cat
     indexes
   end
 
+  def pretty_print(pp)
+    return super if custom_inspect_method_defined?
+    pp.object_address_group(self) do
+      if defined?(@attributes) && @attributes
+        column_names = self.class.column_names.select { |name| has_attribute?(name) || new_record? }
+        pp.seplist(column_names, proc { pp.text ',' }) do |column_name|
+          column_value = read_attribute(column_name)
+          pp.breakable ' '
+          pp.group(1) do
+            pp.text column_name
+            pp.text ':'
+            pp.breakable
+            pp.pp column_value
+          end
+        end
+      else
+        pp.breakable ' '
+        pp.text 'not initialized'
+      end
+    end
+  end
+
+  def update_attributes_from_transaction_state(transaction_state, depth)
+    @reflects_state = [false] if depth == 0
+
+    if transaction_state && transaction_state.finalized? && !has_transactional_callbacks?
+      unless @reflects_state[depth]
+        restore_transaction_record_state if transaction_state.rolledback?
+        clear_transaction_record_state
+        @reflects_state[depth] = true
+      end
+
+      if transaction_state.parent && !@reflects_state[depth+1]
+        update_attributes_from_transaction_state(transaction_state.parent, depth+1)
+      end
+    end
+  end
+
 end
