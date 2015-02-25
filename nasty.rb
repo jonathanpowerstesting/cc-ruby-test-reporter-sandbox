@@ -61,28 +61,28 @@ class Cat
     end
   end
 
-   def validate(*args, &block)
-    options = args.extract_options!
+  # def validate(*args, &block)
+  #   options = args.extract_options!
 
-    if args.all? { |arg| arg.is_a?(Symbol) }
-      options.each_key do |k|
-        unless VALID_OPTIONS_FOR_VALIDATE.include?(k)
-          raise ArgumentError.new("Unknown key: #{k.inspect}. Valid keys are: #{VALID_OPTIONS_FOR_VALIDATE.map(&:inspect).join(', ')}. Perhaps you meant to call `validates` instead of `validate`?")
-        end
-      end
-    end
+  #   if args.all? { |arg| arg.is_a?(Symbol) }
+  #     options.each_key do |k|
+  #       unless VALID_OPTIONS_FOR_VALIDATE.include?(k)
+  #         raise ArgumentError.new("Unknown key: #{k.inspect}. Valid keys are: #{VALID_OPTIONS_FOR_VALIDATE.map(&:inspect).join(', ')}. Perhaps you meant to call `validates` instead of `validate`?")
+  #       end
+  #     end
+  #   end
 
-    if options.key?(:on)
-      options = options.dup
-      options[:if] = Array(options[:if])
-      options[:if].unshift ->(o) {
-        Array(options[:on]).include?(o.validation_context)
-      }
-    end
+  #   if options.key?(:on)
+  #     options = options.dup
+  #     options[:if] = Array(options[:if])
+  #     options[:if].unshift ->(o) {
+  #       Array(options[:on]).include?(o.validation_context)
+  #     }
+  #   end
 
-    args << options
-    set_callback(:validate, *args, &block)
-  end
+  #   args << options
+  #   set_callback(:validate, *args, &block)
+  # end
 
   # def instantiate(result_set, aliases)
   #   primary_key = aliases.column_alias(join_root, join_root.primary_key)
