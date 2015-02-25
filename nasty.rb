@@ -84,35 +84,35 @@ class Cat
     set_callback(:validate, *args, &block)
   end
 
-  def instantiate(result_set, aliases)
-    primary_key = aliases.column_alias(join_root, join_root.primary_key)
+  # def instantiate(result_set, aliases)
+  #   primary_key = aliases.column_alias(join_root, join_root.primary_key)
 
-    seen = Hash.new { |h,parent_klass|
-      h[parent_klass] = Hash.new { |i,parent_id|
-        i[parent_id] = Hash.new { |j,child_klass| j[child_klass] = {} }
-      }
-    }
+  #   seen = Hash.new { |h,parent_klass|
+  #     h[parent_klass] = Hash.new { |i,parent_id|
+  #       i[parent_id] = Hash.new { |j,child_klass| j[child_klass] = {} }
+  #     }
+  #   }
 
-    model_cache = Hash.new { |h,klass| h[klass] = {} }
-    parents = model_cache[join_root]
-    column_aliases = aliases.column_aliases join_root
+  #   model_cache = Hash.new { |h,klass| h[klass] = {} }
+  #   parents = model_cache[join_root]
+  #   column_aliases = aliases.column_aliases join_root
 
-    message_bus = ActiveSupport::Notifications.instrumenter
+  #   message_bus = ActiveSupport::Notifications.instrumenter
 
-    payload = {
-      record_count: result_set.length,
-      class_name: join_root.base_klass.name
-    }
+  #   payload = {
+  #     record_count: result_set.length,
+  #     class_name: join_root.base_klass.name
+  #   }
 
-    message_bus.instrument('instantiation.active_record', payload) do
-      result_set.each { |row_hash|
-        parent = parents[row_hash[primary_key]] ||= join_root.instantiate(row_hash, column_aliases)
-        construct(parent, join_root, row_hash, result_set, seen, model_cache, aliases)
-      }
-    end
+  #   message_bus.instrument('instantiation.active_record', payload) do
+  #     result_set.each { |row_hash|
+  #       parent = parents[row_hash[primary_key]] ||= join_root.instantiate(row_hash, column_aliases)
+  #       construct(parent, join_root, row_hash, result_set, seen, model_cache, aliases)
+  #     }
+  #   end
 
-    parents.values
-  end
+  #   parents.values
+  # end
 
   # def unscope!(*args) # :nodoc:
   #   args.flatten!
