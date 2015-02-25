@@ -1,49 +1,90 @@
 class Cat
   
-  def indexes(table_name, name = nil) #:nodoc:
-    indexes = []
-    current_index = nil
-    execute_and_free("SHOW KEYS FROM #{quote_table_name(table_name)}", 'SCHEMA') do |result|
-      each_hash(result) do |row|
-        if current_index != row[:Key_name]
-          next if row[:Key_name] == 'PRIMARY' # skip the primary key
-          current_index = row[:Key_name]
+  # B ---------------------------------------------------------------------------------------------------------------------------------------
 
-          mysql_index_type = row[:Index_type].downcase.to_sym
-          index_type  = INDEX_TYPES.include?(mysql_index_type)  ? mysql_index_type : nil
-          index_using = INDEX_USINGS.include?(mysql_index_type) ? mysql_index_type : nil
-          indexes << IndexDefinition.new(row[:Table], row[:Key_name], row[:Non_unique].to_i == 0, [], [], nil, nil, index_type, index_using)
-        end
+  def head(status, options = {})
+    options, status = status, nil if status.is_a?(Hash)
+    status ||= options.delete(:status) || :ok
+    location = options.delete(:location)
+    content_type = options.delete(:content_type)
 
-        indexes.last.columns << row[:Column_name]
-        indexes.last.lengths << row[:Sub_part]
-      end
+    options.each do |key, value|
+      headers[key.to_s.dasherize.split('-').each { |v| v[0] = v[0].chr.upcase }.join('-')] = value.to_s
     end
 
-    indexes
-  end
+    self.status = status
+    self.location = url_for(location) if location
 
-  def pretty_print(pp)
-    return super if custom_inspect_method_defined?
-    pp.object_address_group(self) do
-      if defined?(@attributes) && @attributes
-        column_names = self.class.column_names.select { |name| has_attribute?(name) || new_record? }
-        pp.seplist(column_names, proc { pp.text ',' }) do |column_name|
-          column_value = read_attribute(column_name)
-          pp.breakable ' '
-          pp.group(1) do
-            pp.text column_name
-            pp.text ':'
-            pp.breakable
-            pp.pp column_value
-          end
-        end
-      else
-        pp.breakable ' '
-        pp.text 'not initialized'
-      end
+    self.response_body = ""
+
+    if include_content?(self.response_code)
+      self.content_type = content_type || (Mime[formats.first] if formats)
+      self.response.charset = false if self.response
+    else
+      headers.delete('Content-Type')
+      headers.delete('Content-Length')
     end
   end
+
+  private
+  # :nodoc:
+  def include_content?(status)
+    case status
+    when 100..199
+      false
+    when 204, 205, 304
+      false
+    else
+      true
+    end
+  end
+
+  # C ---------------------------------------------------------------------------------------------------------------------------------------
+
+  # def indexes(table_name, name = nil) #:nodoc:
+  #   indexes = []
+  #   current_index = nil
+  #   execute_and_free("SHOW KEYS FROM #{quote_table_name(table_name)}", 'SCHEMA') do |result|
+  #     each_hash(result) do |row|
+  #       if current_index != row[:Key_name]
+  #         next if row[:Key_name] == 'PRIMARY' # skip the primary key
+  #         current_index = row[:Key_name]
+
+  #         mysql_index_type = row[:Index_type].downcase.to_sym
+  #         index_type  = INDEX_TYPES.include?(mysql_index_type)  ? mysql_index_type : nil
+  #         index_using = INDEX_USINGS.include?(mysql_index_type) ? mysql_index_type : nil
+  #         indexes << IndexDefinition.new(row[:Table], row[:Key_name], row[:Non_unique].to_i == 0, [], [], nil, nil, index_type, index_using)
+  #       end
+
+  #       indexes.last.columns << row[:Column_name]
+  #       indexes.last.lengths << row[:Sub_part]
+  #     end
+  #   end
+
+  #   indexes
+  # end
+
+  # def pretty_print(pp)
+  #   return super if custom_inspect_method_defined?
+  #   pp.object_address_group(self) do
+  #     if defined?(@attributes) && @attributes
+  #       column_names = self.class.column_names.select { |name| has_attribute?(name) || new_record? }
+  #       pp.seplist(column_names, proc { pp.text ',' }) do |column_name|
+  #         column_value = read_attribute(column_name)
+  #         pp.breakable ' '
+  #         pp.group(1) do
+  #           pp.text column_name
+  #           pp.text ':'
+  #           pp.breakable
+  #           pp.pp column_value
+  #         end
+  #       end
+  #     else
+  #       pp.breakable ' '
+  #       pp.text 'not initialized'
+  #     end
+  #   end
+  # end
 
   # D ---------------------------------------------------------------------------------------------------------------------------------------
 
