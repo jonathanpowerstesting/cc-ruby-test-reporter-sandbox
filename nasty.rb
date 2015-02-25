@@ -114,29 +114,29 @@ class Cat
     parents.values
   end
 
-  def unscope!(*args) # :nodoc:
-    args.flatten!
-    self.unscope_values += args
+  # def unscope!(*args) # :nodoc:
+  #   args.flatten!
+  #   self.unscope_values += args
 
-    args.each do |scope|
-      case scope
-      when Symbol
-        symbol_unscoping(scope)
-      when Hash
-        scope.each do |key, target_value|
-          if key != :where
-            raise ArgumentError, "Hash arguments in .unscope(*args) must have :where as the key."
-          end
+  #   args.each do |scope|
+  #     case scope
+  #     when Symbol
+  #       symbol_unscoping(scope)
+  #     when Hash
+  #       scope.each do |key, target_value|
+  #         if key != :where
+  #           raise ArgumentError, "Hash arguments in .unscope(*args) must have :where as the key."
+  #         end
 
-          target_values = Array(target_value).map(&:to_s)
-          self.where_clause = where_clause.except(*target_values)
-        end
-      else
-        raise ArgumentError, "Unrecognized scoping: #{args.inspect}. Use .unscope(where: :attribute_name) or .unscope(:order), for example."
-      end
-    end
+  #         target_values = Array(target_value).map(&:to_s)
+  #         self.where_clause = where_clause.except(*target_values)
+  #       end
+  #     else
+  #       raise ArgumentError, "Unrecognized scoping: #{args.inspect}. Use .unscope(where: :attribute_name) or .unscope(:order), for example."
+  #     end
+  #   end
 
-    self
-  end
+  #   self
+  # end
 
 end
