@@ -1,0 +1,4 @@
+File,% covered,Lines,Relevant Lines,Lines covered,Lines missed
+"./lib/goat/goat.rb",70,19,10,7,3
+"./lib/monkey.rb",14,27,14,2,12
+"./lib/zombie.rb",65,39,20,13,7
