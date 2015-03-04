@@ -1,5 +1,5 @@
 require "spec_helper"
-require "spec/goat"
+require "test/goat"
 describe Goat do
 	it "is named Ash" do
 		goat = Goat.new
