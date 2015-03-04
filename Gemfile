@@ -42,3 +42,4 @@ gem 'spring',        group: :development
 #gem 'simplecov-csv', '~> 0.1.3'
 gem "codeclimate-test-reporter", group: :test, require: nil
 gem 'rspec-rails'
+gem 'simplecov', :require => false, :group => :test
