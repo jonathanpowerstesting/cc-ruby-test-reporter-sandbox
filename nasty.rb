@@ -2,6 +2,7 @@ require 'erb'
 require 'yaml'
 require 'optparse'
 
+#Test253
 module Rails
   class DBConsole
     attr_reader :arguments
