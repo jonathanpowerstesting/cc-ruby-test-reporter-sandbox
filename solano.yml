@@ -1,3 +1,4 @@
 tests:
   - rspec /spec/lib/zombie_spec.rb:3
+  - rspec /spec/lib/zombie_spec.rb:9
 test_pattern: 'none'
