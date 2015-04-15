@@ -6,9 +6,3 @@ describe Zombie do
 		zombie.name.should == 'Ash'
 	end
 end
-describe Chicken do
-	it "is named Ash" do
-		chicken = Chicken.new
-		chicken.name.should == 'Ash'
-	end
-end
