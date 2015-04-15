@@ -1,3 +1,2 @@
 tests:
-  - bundle exec rake
-  - bundle exec rspec
+  - rspec /spec/lib/zombie_spec.rb:3
