@@ -6,3 +6,5 @@ describe Zombie do
 		zombie.name.should == 'Ash'
 	end
 end
+describe Zombie do
+end
