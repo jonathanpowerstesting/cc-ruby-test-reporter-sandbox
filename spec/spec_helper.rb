@@ -4,10 +4,10 @@ CodeClimate::TestReporter.start
 require 'coveralls'
 Coveralls.wear!
 
-#SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-#  CodeClimate::TestReporter::Formatter,
-#  Coveralls::SimpleCov::Formatter
-#]
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  CodeClimate::TestReporter::Formatter,
+  Coveralls::SimpleCov::Formatter
+]
 
 #require 'simplecov'
 #SimpleCov.start
